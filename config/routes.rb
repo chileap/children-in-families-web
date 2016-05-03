@@ -25,7 +25,10 @@ Rails.application.routes.draw do
       put 'set_complete'
     end
   end
+
+  get '/report' => 'clients#report'
   resources :clients do
+    resources :government_reports
     resources :assessments
     resources :case_notes
     resources :cases do
@@ -37,6 +40,8 @@ Rails.application.routes.draw do
       resources :tasks
     end
   end
+
+  
 
   resources :families
   resources :partners

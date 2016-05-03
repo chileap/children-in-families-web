@@ -1,4 +1,45 @@
 en:
+  form_id: Form ID
+  kingdom_of_wonder: Kingdom of Wonder
+  nation_religion_king: Nation Religion King
+  header_capital_province: Capital Province
+  header_city_district: City District
+  header_commune: Commune
+  first_response_form: First Response Form
+  for_children_who_are_in_danger: For children who are in danger
+  date: Date
+  client_code: Client code
+  commune: ​Commune
+  city_district: City/District
+  province_capital: Province/Capital
+  name_shortcut: Name shortcut
+  phone_number: Phone number
+  client_name: Client name
+  date_of_birth: Date of birth
+  gender: Gender
+  boy: Boy
+  girl: Girl
+  first_found_client_place: First found client place
+  at: At
+  village: Village
+  education: Education
+  carer_name: Carer name
+  communication_with_client: Communication with client
+  carer_address: Carer address
+  house_number: House
+  street_number: Street
+  district: District
+  date_received_info: Received infomation date
+  day: Day
+  month: Month
+  year: Year
+  transfer_info: Transfer information
+  name: Name
+  position: Position
+  or: Or
+  anonymous: anonymous (if referral does not want to show his/her identity) information
+
+
   review_problem: 'Please review the problems below:'
   cannot_be_blank: can't be blank
 
@@ -213,6 +254,7 @@ en:
       view_tasks: Tasks
       view_assessments: Assessments
       view_case_notes: Case Notes
+      government_report: Government Reports
       accept: Accept
       reject: Reject
       note: Note

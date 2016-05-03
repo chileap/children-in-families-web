@@ -1,0 +1,9 @@
+!!!
+%html
+  %head
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport", charset: 'utf-8'}
+    %title Idbyme
+    = wicked_pdf_stylesheet_link_tag 'application'
+
+  %body{ style: 'background-color:#fff;padding-bottom:30px;padding-left:40px;padding-right:40px;' }
+    = yield

@@ -68,6 +68,17 @@ class ClientsController < AdminController
     redirect_to clients_url, notice: t('.successfully_deleted')
   end
 
+  def report
+    respond_to do |format|
+      format.pdf do
+        render  pdf:      'report',
+                template: 'clients/report.pdf.haml',
+                layout:   'pdf_design.html.haml',
+                header: { html: { template: 'clients/pdf/header.pdf.haml' } }
+      end
+    end    
+  end
+
   private
 
   def find_client

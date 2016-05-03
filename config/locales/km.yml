@@ -1,4 +1,44 @@
 km:
+  form_id: ទម្រង់
+  kingdom_of_wonder: ព្រះរាជាណាចក្រកម្ពុជា
+  nation_religion_king: ជាតិ សាសនា ព្រះមហាក្សត្រ
+  header_capital_province: រាជធានី ខេត្ត
+  header_city_district: ក្រុង ស្រុក ខណ្ឌ
+  header_commune: ឃុំ សង្កាត់
+  first_response_form: ទម្រង់ឆ្លើយតបលើកដំបូង
+  for_children_who_are_in_danger: សម្រាប់កុមារដែលស្ថិតក្នុងស្ថានភាពគ្រោះថ្នាក់
+  date: កាលបរិច្ឆេទ
+  client_code: លេខកូដកុមារ
+  commune: ឃុំ/សង្កាត់
+  city_district: ក្រុង/ស្រុក/ខណ្ឌ
+  province_capital: ខេត្ត/រាជធានី
+  name_shortcut: ឈ្មោះគ.ក.ន.ក
+  phone_number: លេខទូរសព្ទ
+  client_name: ឈ្មោះកុមារ
+  date_of_birth: ថ្ងៃខែឆ្នាំកំណើត
+  gender: ភេទ
+  boy: ប
+  girl: ស
+  first_found_client_place: ទីកន្លែងជួបកុមារដំបូង
+  at: នៅ
+  village: ភូមិ
+  education: កម្រិតវប្បធម៌
+  carer_name: ឈ្មោះអ្នកថែទាំ
+  communication_with_client: ទំនាក់ទំនងជាមួយកុមារ
+  carer_address: អាសយដ្ឋានអ្នកថែទាំ
+  house_number: ផ្ទះលេខ
+  street_number: ផ្លូវលេខ
+  district: ឃុំ/សង្កាត់
+  date_received_info: កាលបរិច្ឆេទនៃការទទួលពត៌មានអំពីករណី
+  day: ថ្ងៃទី
+  month: ខែ
+  year: ឆ្នាំ
+  transfer_info: ប្រភពនៃការបញ្ជូន
+  name: ឈ្មោះ
+  position: មុខងារ
+  or: ឬ
+  anonymous: អនាមិក (ប្រសិនបើអ្នកបញ្ជូនមិនចង់បង្ហាញអត្តសញ្ញាណរបស់ខ្លួន) ពត៌មានដែលទទួលបាន
+
   review_problem: សូមពិនិត្យបញ្ហាសារឡើងវិញនៅខាងក្រោម៖
   cannot_be_blank: មិនអាចរំលង
 
@@ -209,6 +249,7 @@ km:
       view_ec_history_btn_link: មើលប្រវត្តិនៃ EC
       view_fc_history_btn_link: មើលប្រវត្តិនៃ FC
       view_kc_history_btn_link: មើលប្រវត្តិនៃ KC
+      government_report: របាយការណ៍សម្រាប់រដ្ឋាភិបាល
       accept: ទទួលយក
       reject: មិនទទួលយក
       note: កំណត់ហេតុ

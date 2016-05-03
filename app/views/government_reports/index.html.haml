@@ -1,0 +1,41 @@
+.row
+  .col-xs-12.col-md-8.col-md-offset-2
+    .panel.panel-default
+      .panel-heading
+        %h4.text-center
+          %strong Client Name
+      .panel-body
+        .row
+          .col-xs-12.col-sm-10.col-sm-offset-1
+            .row.text-center
+              .col-xs-12.col-sm-6
+                %h5
+                  %b April 25, 1995
+              .col-xs-12.col-sm-6
+                = link_to 'Report PDF', report_path(format: :pdf), class:'btn btn-info button push-bottom'
+                  
+          / .col-xs-12.col-sm-10.col-sm-offset-1.text-center
+          /   .row
+          /     .col-xs-12.col-sm-6
+          /       %h5
+          /         - if @client.assessments.any?
+          /           = t('.next_six_monthly_review')
+          /         - else
+          /           = t('.initial_assessment')
+          /         - if @client.assessments.any?
+          /           %b
+          /             = @client.next_assessment_date.strftime('%B %d, %Y')
+          /         - else
+          /           %b
+          /             = Date.today.strftime('%B %d, %Y')
+          /     .col-xs-12.col-sm-6
+          /       - if @client.can_create_assessment?
+          /         = link_to t('.begin_now'), new_client_assessment_path(@client), { class:'btn btn-success button' }
+          /       - else
+          /         %label.btn.btn-default.disabled.button.push-bottom
+          /           = t('.begin_now')
+      .panel-footer
+        .row         
+          .col-xs-12.col-sm-6
+            = link_to 'Back', '#'
+            / # = link_to t('.back'), client_path(@client), { class:'btn btn-default button' }

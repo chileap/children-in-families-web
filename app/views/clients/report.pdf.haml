@@ -1,0 +1,130 @@
+#government-report
+  .row
+    .col-xs-12.text-right
+      %h4
+        %p
+          %b= t('kingdom_of_wonder')
+        %p
+          %b= t('nation_religion_king')
+    .col-xs-12
+      %p{style:'display:table;width:50%;'}
+        %span{style:'display:table-cell;width:25%;'}= "#{t('header_capital_province')} :"
+        %span{ style: 'border-bottom:1px dotted #000;display:table-cell;width:100%;' }
+      %p{style:'display:table;width:50%;'}
+        %span{style:'display:table-cell;width:30%;'}= "#{t('header_city_district')} :"
+        %span{ style: 'border-bottom:1px dotted #000;display:table-cell;width:100%;' }
+      %p{style:'display:table;width:50%;'}
+        %span{style:'display:table-cell;width:20%;'}= "#{t('header_commune')} :"
+        %span{ style: 'border-bottom:1px dotted #000;display:table-cell;width:100%;' }
+    .col-xs-12.text-center
+      %h4
+        %b= t('first_response_form')
+      %p{style:'margin-bottom:40px;'}= "(#{t('for_children_who_are_in_danger')})"
+    .col-xs-12
+      .row
+        .col-xs-6
+          %p= "#{t('date')} :"
+        .col-xs-6
+          %p= "#{t('client_code')} :"
+    .col-xs-12
+      .row
+        .col-xs-4
+          %p= "#{t('commune')} :"
+        .col-xs-4
+          %p= "#{t('city_district')} :"
+        .col-xs-4
+          %p= "#{t('province_capital')} :"
+    .col-xs-12
+      .row
+        .col-xs-6
+          %p= "#{t('name_shortcut')} :"
+        .col-xs-6
+          %p= "#{t('phone_number')} :"
+    .col-xs-12
+      .row
+        .col-xs-5
+          %p= "#{t('client_name')} :"
+        .col-xs-4
+          %p
+            %span= "#{t('date_of_birth')} :"
+            %span ...../
+            %span ...../
+            %span .....
+        .col-xs-3
+          %p
+            %span= "#{t('gender')} :"
+            %input{ type: 'checkbox' }= t('boy')
+            %input{ type: 'checkbox' }= t('girl')
+    .col-xs-12
+      %p
+        %span= "#{t('first_found_client_place')} :"
+        %span= t('at')
+        %span ...............................
+        %span= t('village')
+        %span ...............................
+    .col-xs-12
+      %p
+        %span= "#{t('education')} :"
+        %span ..............................
+    .col-xs-12
+      .row
+        .col-xs-6
+          %p
+            %span= "#{t('carer_name')} :"
+            %span ...........................
+        .col-xs-6
+          %p
+            %span= "#{t('communication_with_client')} :"
+            %span ...........................
+    .col-xs-12
+      %p
+        %span= "#{t('carer_address')} :"
+        %span= "#{t('house_number')} :"
+        %span ........
+        %span= "#{t('street_number')} :"
+        %span ........
+        %span= "#{t('village')} :"
+        %span ........
+        %span= "#{t('district')} :"
+        %span ........
+    .col-xs-12
+      .row
+        .col-xs-4
+          %p
+            %span= "#{t('city_district')} :"
+            %span ........
+        .col-xs-4
+          %p
+            %span= "#{t('province_capital')} :"
+            %span ........
+        .col-xs-4
+          %p
+            %span= "#{t('phone_number')} :"
+            %span ........  
+    .col-xs-12      
+      %p
+        %span= "#{t('date_received_info')} :"
+        %span= t('day')
+        %span ........
+        %span= t('month')
+        %span ........
+        %span= t('year')
+        %span ........
+    .col-xs-12
+      .row
+        .col-xs-7
+          %p
+            %span= "#{t('transfer_info')} :"
+            %span= "#{t('name')}"
+            %span ........
+        .col-xs-5
+          %p
+            %span= "#{t('position')}"
+            %span ........
+    .col-xs-12
+      %p
+        %span= t('or')
+        %input{ type: 'checkbox' }
+        %span= "#{t('anonymous')} :"
+
+
