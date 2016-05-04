@@ -74,7 +74,10 @@ class ClientsController < AdminController
         render  pdf:      'report',
                 template: 'clients/report.pdf.haml',
                 layout:   'pdf_design.html.haml',
-                header: { html: { template: 'clients/pdf/header.pdf.haml' } }
+                header: { html: { template: 'clients/pdf/header.pdf.haml' } },
+                footer: { html: { template: 'clients/pdf/footer.pdf.haml' },
+                right: '[page] of [topage]'
+              }
       end
     end    
   end

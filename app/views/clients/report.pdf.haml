@@ -7,15 +7,15 @@
         %p
           %b= t('nation_religion_king')
     .col-xs-12
-      %p{style:'display:table;width:50%;'}
-        %span{style:'display:table-cell;width:25%;'}= "#{t('header_capital_province')} :"
-        %span{ style: 'border-bottom:1px dotted #000;display:table-cell;width:100%;' }
-      %p{style:'display:table;width:50%;'}
-        %span{style:'display:table-cell;width:30%;'}= "#{t('header_city_district')} :"
-        %span{ style: 'border-bottom:1px dotted #000;display:table-cell;width:100%;' }
-      %p{style:'display:table;width:50%;'}
-        %span{style:'display:table-cell;width:20%;'}= "#{t('header_commune')} :"
-        %span{ style: 'border-bottom:1px dotted #000;display:table-cell;width:100%;' }
+      %p
+        %span= "#{t('header_capital_province')} :"
+        %span{ style: 'border-bottom:1px dotted #000;display:inline-block;width:100px;' }
+      %p
+        %span= "#{t('header_city_district')} :"
+        %span{ style: 'border-bottom:1px dotted #000;display:inline-block;width:100px;' }
+      %p
+        %span= "#{t('header_commune')} :"
+        %span{ style: 'border-bottom:1px dotted #000;display:inline-block;width:100px;' }
     .col-xs-12.text-center
       %h4
         %b= t('first_response_form')
@@ -126,5 +126,181 @@
         %span= t('or')
         %input{ type: 'checkbox' }
         %span= "#{t('anonymous')} :"
-
-
+    %footer{ style: 'page-break-after:always;'}
+      %p{style:'display:inline-block;border-bottom:1px solid #000;width:100%;'}
+      %p{style:'display:inline-block;border-bottom:1px solid #000;width:100%;'}
+      %p{style:'display:inline-block;border-bottom:1px solid #000;width:100%;'}
+      %p{style:'display:inline-block;border-bottom:1px solid #000;width:100%;'}
+    .col-xs-12
+      %p
+        %span= "#{t('danger_situation')} : #{t('check')}"
+        %span "
+        %i.fa.fa-check
+        %span "
+        %span= t('every_point')
+    .col-xs-12
+      .row
+        .col-xs-6
+          %p
+            %span= "#{t('one')}-"
+            %span= t('reason_for_family_separation')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('abandoned')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('child_changed_home')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('family_changed_home')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('child_living_independently')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('orphan_lost_mother_father_both')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('orphan_lost_father')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('orphan_lost_mother')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('child_living_on_street')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('other')
+        .col-xs-6
+          %p
+            %span= "#{t('two')}-"
+            %span= t('lack_of_necessary_need')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('food')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('habitation')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('education')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('health_care')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('parents_guardians_have_poor_card')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('other')
+      .row
+        .col-xs-6
+          %p
+            %span= "#{t('three')}-"
+            %span= t('history_of_harm')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('physical_abuse')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('sexual_abuse')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('emotional_abuse')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('child_exploitation')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('exessive_child_labour')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('family_violence')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('experience_with_trafficking')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('danger_of_trafficking')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('family_violence')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('neglect')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('other')                                    
+        .col-xs-6
+          %p
+            %span= "#{t('three')}-"
+            %span= t('history_of_harm')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('physical_abuse')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('sexual_abuse')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('emotional_abuse')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('child_exploitation')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('exessive_child_labour')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('family_violence')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('experience_with_trafficking')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('other')
+      .row
+        .col-xs-6
+          %p
+            %span= "#{t('three')}-"
+            %span= t('history_of_harm')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('physical_abuse')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('sexual_abuse')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('emotional_abuse')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('child_exploitation')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('exessive_child_labour')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('family_violence')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('experience_with_trafficking')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('danger_of_trafficking')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('family_violence')
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('other')
+    .col-xs-12
+      .row
+        .col-xs-8
+          %p= "#{t('is_child_living_with_parents_or_guardians')}?"
+        .col-xs-4
+          %p
+            %input{ type: 'checkbox' }
+            %span= t('positive')
+            %input{ type: 'checkbox' }
+            %span= t('negative')

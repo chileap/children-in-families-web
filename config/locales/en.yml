@@ -38,7 +38,41 @@ en:
   position: Position
   or: Or
   anonymous: anonymous (if referral does not want to show his/her identity) information
-
+  danger_situation: The conditions that cause or may cause danger to client
+  check: check
+  every_point: every point that actually happened
+  one: '1'
+  reason_for_family_separation: Reason for family separation
+  abandoned: Abandoned
+  child_changed_home: Child changed home
+  child_living_independently: Child living independently
+  child_living_on_street: Child living on street
+  family_changed_home: Family changed home
+  orphan_lost_mother_father_both: Orphan (lost both father and mother)
+  orphan_lost_father: Orphan (lost father)
+  orphan_lost_mother: Orphan (lost mother)
+  other: Other
+  two: '2'
+  lack_of_necessary_need: Lack of necessary
+  food: Food
+  habitation: Habitation
+  education: Education
+  health_care: Health care
+  parents_guardians_have_poor_card: Parents/Guardians have poor card
+  three: '3'
+  history_of_harm: History of harm
+  physical_abuse: Physical abuse
+  sexual_abuse: Sexual abuse
+  emotional_abuse: Emotional abuse
+  child_exploitation: Child exploitation
+  exessive_child_labour: Exessive child labour
+  family_violence: Family violence
+  experience_with_trafficking: Experience with trafficking
+  danger_of_trafficking: Danger of trafficking
+  neglect: Neglect
+  is_child_living_with_parents_or_guardians: Is child living with parents or guardians
+  positive: Yes
+  negative: No
 
   review_problem: 'Please review the problems below:'
   cannot_be_blank: can't be blank

@@ -18,6 +18,7 @@
 //= require clients/index
 //= require clients/show
 //= require clients/form
+//= require clients/report
 //= require common
 //= require jquery.validate
 //= require jquery.validate.additional-methods
