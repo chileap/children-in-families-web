@@ -114,36 +114,34 @@
       .row
         .col-xs-4
           %p{ style: 'display:table;width:100%;' }
-            %span{ style: 'display:table-cell;width:50%;' }= "#{t('city_district')} :"
+            %span{ style: 'display:table-cell;width:60%;' }= "#{t('city_district')} :"
+            %span{ style: 'display:table-cell;width:40%;border-bottom:1px solid #000;' }
+        .col-xs-4
+          %p{ style: 'display:table;width:100%;' }
+            %span{ style: 'display:table-cell;width:50%;' }= "#{t('province_capital')} :"
             %span{ style: 'display:table-cell;width:50%;border-bottom:1px solid #000;' }
         .col-xs-4
-          %p
-            %span= "#{t('province_capital')} :"
-            %span ........
-        .col-xs-4
-          %p
-            %span= "#{t('phone_number')} :"
-            %span ........  
+          %p{ style: 'display:table;width:100%;' }
+            %span{ style: 'display:table-cell;width:50%;' }= "#{t('phone_number')} :"
+            %span{ style: 'display:table-cell;width:50%;border-bottom:1px solid #000;' }
     .col-xs-12.wide-hight{ style: 'padding:5px 0;' }
-      %p
-        %span= "#{t('date_received_info')} :"
-        %span= t('day')
-        %span ........
-        %span= t('month')
-        %span ........
-        %span= t('year')
-        %span ........
+      %p{ style: 'display:table;width:100%;' }
+        %span{ style: 'display:table-cell;width:45%;' }= "#{t('date_received_info')} :"
+        %span{ style: 'display:table-cell;width:5%;' }= t('day')
+        %span{ style: 'display:table-cell;width:13%;border-bottom:1px solid #000;' }
+        %span{ style: 'display:table-cell;width:5%;' }= t('month')
+        %span{ style: 'display:table-cell;width:13%;border-bottom:1px solid #000;' }
+        %span{ style: 'display:table-cell;width:5%;' }= t('year')
+        %span{ style: 'display:table-cell;width:14%;border-bottom:1px solid #000;' }
     .col-xs-12.wide-hight{ style: 'padding:5px 0;' }
       .row
-        .col-xs-7
-          %p
-            %span= "#{t('transfer_info')} :"
-            %span= "#{t('name')}"
-            %span ........
-        .col-xs-5
-          %p
-            %span= "#{t('position')}"
-            %span ........
+        .col-xs-12
+          %p{ style: 'display:table;width:100%;' }
+            %span{ style: 'display:table-cell;width:20%;' }= "#{t('transfer_info')} :"
+            %span{ style: 'display:table-cell;width:5%;' }= "#{t('name')}"
+            %span{ style: 'display:table-cell;width:35%;border-bottom:1px solid #000;' }
+            %span{ style: 'display:table-cell;width:5%;' }= "#{t('position')}"
+            %span{ style: 'display:table-cell;width:35%;border-bottom:1px solid #000;' }
     .col-xs-12.wide-hight{ style: 'padding:5px 0;' }
       %p
         %span= t('or')
