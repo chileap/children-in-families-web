@@ -12,7 +12,7 @@ km:
   commune: ឃុំ/សង្កាត់
   city_district: ក្រុង/ស្រុក/ខណ្ឌ
   province_capital: ខេត្ត/រាជធានី
-  name_shortcut: ឈ្មោះគ.ក.ន.ក
+  shortcut: គ.ក.ន.ក
   phone_number: លេខទូរសព្ទ
   client_name: ឈ្មោះកុមារ
   date_of_birth: ថ្ងៃខែឆ្នាំកំណើត
@@ -22,7 +22,7 @@ km:
   first_found_client_place: ទីកន្លែងជួបកុមារដំបូង
   at: នៅ
   village: ភូមិ
-  education: កម្រិតវប្បធម៌
+  education_level: កម្រិតវប្បធម៌
   carer_name: ឈ្មោះអ្នកថែទាំ
   communication_with_client: ទំនាក់ទំនងជាមួយកុមារ
   carer_address: អាសយដ្ឋានអ្នកថែទាំ
@@ -73,6 +73,30 @@ km:
   is_child_living_with_parents_or_guardians: តើកុមារកំពុងរស់នៅជាមួយឪពុកម្ដាយ ឬអាណាព្យាបាល
   positive: បាទ/ចាស
   negative: ទេ
+  child_situation_and_need: ស្ថានភាពកុមារ និងតម្រូវការ
+  present_situation: ស្ថានភាពបច្ចុប្បន្ន
+  need: តម្រូវការ
+  intervention_plan: ផែនការអន្តរាគមន៍
+  physical_health: សុខភាពផ្លូវកាយ
+  food_habitation: ចំណីអាហារទីជម្រក
+  and: និង
+  clothes: សម្លៀកបំពាក់
+  communication_in_family: ទំនាក់ទំនងក្នុងគ្រួសារ
+  communication_in_society: ការទំនាក់ទំនងសង្គម
+  emotional_health: សុខភាពផ្លូវចិត្ត
+  necessary_mission: វិធានការចាំបាច់
+  none: គ្មាន (ករណីត្រូវបញ្ចប់)
+  exist: មាន
+  if_exist: 'ប្រសិនបើមាន ត្រូវ៖'
+  missions_which_need_to_be_done: ត្រង់វិធានការណាមួយដែលត្រូវអនុវត្ត
+  follow_procedures_for_car: អនុវត្តតាមនីតិវិធីទុកដាក់កុមារតាមការថែទាំជំនួស និងបំពេញទម្រង់ទី១៣០៤ (ករណីកុមារកំពុងឬអាចមានគ្រោះថ្នាក់ឆាប់ៗខាងមុខ)
+  keep_children_in_family: អនុវត្តតាមនីតិវិធីរក្សាទុកកុមារក្នុងគ្រួសារនិងបំពេញទម្រង់១៣០២និងទម្រង់ទី១៣០៣
+  compact_family: អនុវត្តតាមនីតិវិធីបង្រួបបង្រួមគ្រួសារ និងបំពេញទម្រង់ទី១៣០៣ និងទម្រង់ទី១៣០៣ (ករណីកុមារបែកពីគ្រួសារ)
+  leave_away_children: អនុវត្តតាមនីតិវិធីកុមារដែលត្រូវបានគេបោះបង់ចោល និងបំពេញទម្រង់ទី១៣០៧ (ករណីកុមារត្រូវគេបោះបង់ចោល)
+  seen_and_agreed: បានឃើញ និងឯកភាព
+  signature: ហត្ថលេខា និងត្រាមេឃុំ ឬចៅសង្កាត់
+  copy: ចម្លងជូន
+  office: ការិយាល័យស.អ.យ ក្រុង ស្រុក ខណ្ឌ
 
   review_problem: សូមពិនិត្យបញ្ហាសារឡើងវិញនៅខាងក្រោម៖
   cannot_be_blank: មិនអាចរំលង

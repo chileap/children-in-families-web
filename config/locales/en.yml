@@ -12,7 +12,7 @@ en:
   commune: ​Commune
   city_district: City/District
   province_capital: Province/Capital
-  name_shortcut: Name shortcut
+  shortcut: shortcut
   phone_number: Phone number
   client_name: Client name
   date_of_birth: Date of birth
@@ -56,7 +56,7 @@ en:
   lack_of_necessary_need: Lack of necessary
   food: Food
   habitation: Habitation
-  education: Education
+  education_level: Education
   health_care: Health care
   parents_guardians_have_poor_card: Parents/Guardians have poor card
   three: '3'
@@ -71,8 +71,32 @@ en:
   danger_of_trafficking: Danger of trafficking
   neglect: Neglect
   is_child_living_with_parents_or_guardians: Is child living with parents or guardians
-  positive: Yes
-  negative: No
+  positive: 'Yes'
+  negative: 'No'
+  child_situation_and_need: Child situation and need
+  present_situation: Present situation
+  need: Need
+  intervention_plan: Intervention plan
+  physical_health: Physical health
+  food_habitation: Food habitation
+  and: and
+  clothes: clothes
+  communication_in_family: Communication in family
+  communication_in_society: Communication in society
+  emotional_heath: Emotional health
+  necessary_mission: Necessary mission
+  none: None (case is finished)
+  exist: Exist
+  if_exist: 'If exist:'
+  missions_which_need_to_be_done: missions which need to be done
+  follow_procedures_for_car: Follow procedures
+  keep_children_in_family: Follow procedures
+  compact_family: Follow procedures
+  leave_away_children: Follow procedures
+  seen_and_agreed: Seen and agreed
+  signature: Signature
+  copy: Copy
+  office: Office
 
   review_problem: 'Please review the problems below:'
   cannot_be_blank: can't be blank
