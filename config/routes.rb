@@ -26,7 +26,6 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/report' => 'clients#report'
   resources :clients do
     resources :government_reports
     resources :assessments
