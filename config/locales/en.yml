@@ -4,6 +4,7 @@ en:
   nation_religion_king: Nation Religion King
   header_capital_province: Capital Province
   header_city_district: City District
+  initial_date: Initial date
   header_commune: Commune
   first_response_form: First Response Form
   for_children_who_are_in_danger: For children who are in danger

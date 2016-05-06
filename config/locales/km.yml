@@ -5,6 +5,7 @@ km:
   header_capital_province: រាជធានី ខេត្ត
   header_city_district: ក្រុង ស្រុក ខណ្ឌ
   header_commune: ឃុំ សង្កាត់
+  initial_date: កាលបរិច្ឆេទ
   first_response_form: ទម្រង់ឆ្លើយតបលើកដំបូង
   for_children_who_are_in_danger: សម្រាប់កុមារដែលស្ថិតក្នុងស្ថានភាពគ្រោះថ្នាក់
   date: កាលបរិច្ឆេទ
@@ -23,7 +24,7 @@ km:
   at: នៅ
   village: ភូមិ
   education_level: កម្រិតវប្បធម៌
-  carer_name: ឈ្មោះអ្នកថែទាំ
+  carer_name: ឈ្មោះអ្នកថែទាំកុមារ
   communication_with_client: ទំនាក់ទំនងជាមួយកុមារ
   carer_address: អាសយដ្ឋានអ្នកថែទាំ
   house_number: ផ្ទះលេខ

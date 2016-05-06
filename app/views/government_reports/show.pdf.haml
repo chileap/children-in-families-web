@@ -26,20 +26,14 @@
     .col-xs-12{ style: 'padding:5px 0;' }
       .row
         .col-xs-6
-          %p
-            %span= "#{t('date')} :"
-            %span{ style: 'width:20%;display:inline-block;border-bottom:1px solid #000;' }
-              = @government_report.initial_date.strftime('%d')
-            %span /
-            %span{ style: 'width:20%;display:inline-block;border-bottom:1px solid #000;' }
-              = @government_report.initial_date.strftime('%m')
-            %span /
-            %span{ style: 'width:20%;display:inline-block;border-bottom:1px solid #000;' }
-              = @government_report.initial_date.strftime('%Y')
+          %p{ style: 'width:100%;display:table;' }
+            %span{ style: 'width:40%;display:table-cell;' }= "#{t('initial_date')} :"
+            %span.text-center{ style: 'width:60%;border-bottom:1px solid #000;display:table-cell;' }
+              = "#{@government_report.initial_date.strftime('%d')} / #{@government_report.initial_date.strftime('%m')} / #{@government_report.initial_date.strftime('%Y')}" if @government_report.initial_date
         .col-xs-6
           %p{ style: 'display:table;width:100%;' }
             %span{ style: 'display:table-cell;width:35%;' }= "#{t('client_code')} :"
-            %span{ style: 'width:65%;display:table-cell;border-bottom:1px solid #000;' }
+            %span.text-center{ style: 'width:65%;display:table-cell;border-bottom:1px solid #000;' }
               = @government_report.client_code            
 
     .col-xs-12{ style: 'padding:5px 0;' }
@@ -47,133 +41,133 @@
         .col-xs-4
           %p{ style: 'display:table;width:100%;' }
             %span{ style: 'display:table-cell;width:40%;' }= "#{t('commune')} :"
-            %span{ style: 'display:table-cell;width:60%;border-bottom:1px solid #000;' }
+            %span.text-center{ style: 'display:table-cell;width:60%;border-bottom:1px solid #000;' }
               = @government_report.commune
         .col-xs-4
           %p{ style: 'display:table;width:100%;' }
-            %span{ style: 'display:table-cell;width:60%;' }= "#{t('city_district')} :"
-            %span{ style: 'display:table-cell;width:60%;border-bottom:1px solid #000;' }
+            %span{ style: 'display:table-cell;width:55%;' }= "#{t('city_district')} :"
+            %span.text-center{ style: 'display:table-cell;width:45%;border-bottom:1px solid #000;' }
               = @government_report.city
         .col-xs-4
           %p{ style: 'display:table;width:100%;' }
             %span{ style: 'display:table-cell;width:50%;' }= "#{t('province_capital')} :"
-            %span{ style: 'display:table-cell;width:50%;border-bottom:1px solid #000;' }
+            %span.text-center{ style: 'display:table-cell;width:50%;border-bottom:1px solid #000;' }
               = @government_report.capital
     .col-xs-12{ style: 'padding:5px 0;' }
       .row
         .col-xs-6
           %p{ style: 'display:table;width:100%;' }
             %span{ style: 'display:table-cell;width:40%;' }= "#{t('name')}#{t('shortcut')} :"
-            %span{ style: 'display:table-cell;width:60%;border-bottom:1px solid #000;' }
+            %span.text-center{ style: 'display:table-cell;width:60%;border-bottom:1px solid #000;' }
               = @government_report.organisation_name
         .col-xs-6
           %p{ style: 'display:table;width:100%;' }
-            %span{ style: 'display:table-cell;width:40%;' }= "#{t('phone_number')} :"
-            %span{ style: 'display:table-cell;width:60%;border-bottom:1px solid #000;' }
+            %span{ style: 'display:table-cell;width:30%;' }= "#{t('phone_number')} :"
+            %span.text-center{ style: 'display:table-cell;width:70%;border-bottom:1px solid #000;' }
               = @government_report.organisation_phone_number
     .col-xs-12{ style: 'padding:5px 0;' }
       .row
         .col-xs-5
           %p{ style: 'display:table;width:100%;' }
             %span{ style: 'display:table-cell;width:40%;' }= "#{t('client_name')} :"
-            %span{ style: 'display:table-cell;width:60%;border-bottom:1px solid #000;' }
+            %span.text-center{ style: 'display:table-cell;width:60%;border-bottom:1px solid #000;' }
               = @government_report.client_name
-        .col-xs-4
-          %p
-            %span= "#{t('date_of_birth')} :"
-            %span{ style: 'width:11%;display:inline-block;border-bottom:1px solid #000;' }
-              = @government_report.client_date_of_birth.strftime('%d')
-            %span /
-            %span{ style: 'width:11%;display:inline-block;border-bottom:1px solid #000;' }
-              = @government_report.client_date_of_birth.strftime('%m')
-            %span /
-            %span{ style: 'width:12%;display:inline-block;border-bottom:1px solid #000;' }
-              = @government_report.client_date_of_birth.strftime('%Y')
+        .col-xs-4{ style: 'padding-right:2px;' }
+          %p{ style: 'width:100%;display:table;' }
+            %span{ style: 'width:55%;display:table-cell;' }= "#{t('date_of_birth')} :"
+            %span.text-center{ style: 'width:45%;border-bottom:1px solid #000;display:table-cell;' }
+              = "#{@government_report.client_date_of_birth.strftime('%d')} / #{@government_report.client_date_of_birth.strftime('%m')} / #{@government_report.client_date_of_birth.strftime('%Y')}" if @government_report.client_date_of_birth
         .col-xs-3
-          %p
-            %span= "#{t('gender')} :"
-            %input{ type: 'checkbox', checked: ('checked' if @government_report.client_gender == 'male') }= t('boy')
-            %input{ type: 'checkbox', checked: ('checked' if @government_report.client_gender == 'female') }= t('girl')
+          %p{ style: 'width:100%;display:table;' }
+            %span{ style: 'width:35%;display:table-cell;' }= "#{t('gender')} :"
+            %span{ style: 'width:35%;display:table-cell;' }
+              %input.text-left{ type: 'checkbox', checked: ('checked' if @government_report.client_gender == 'male') }= " #{t('boy')}"
+            %span{ style: 'width:30%;display:table-cell;' }
+              %input.text-left{ type: 'checkbox', checked: ('checked' if @government_report.client_gender == 'female') }= " #{t('girl')}"
     .col-xs-12{ style: 'padding:5px 0;' }
       %p{ style: 'display:table;width:100%;' }
         %span{ style: 'display:table-cell;width:24%;' }= "#{t('first_found_client_place')} :"
         %span{ style: 'display:table-cell;width:5%;' }= t('at')
-        %span{ style: 'display:table-cell;width:33%;border-bottom:1px solid #000;' }
+        %span.text-center{ style: 'display:table-cell;width:33%;border-bottom:1px solid #000;' }
           = @government_report.found_client_at
         %span{ style: 'display:table-cell;width:5%;' }= t('village')
-        %span{ style: 'display:table-cell;width:33%;border-bottom:1px solid #000;' }
+        %span.text-center{ style: 'display:table-cell;width:33%;border-bottom:1px solid #000;' }
           = @government_report.found_client_village
     .col-xs-12{ style: 'padding:5px 0;' }
       %p{ style: 'display:table;width:100%;' }
         %span{ style: 'display:table-cell;width:15%;' }= "#{t('education_level')} :"
-        %span{ style: 'display:table-cell;width:85%;border-bottom:1px solid #000;' }
+        %span.text-center{ style: 'display:table-cell;width:85%;border-bottom:1px solid #000;' }
           = @government_report.education
     .col-xs-12{ style: 'padding:5px 0;' }
       .row
         .col-xs-6
           %p{ style: 'display:table;width:100%;' }
-            %span{ style: 'display:table-cell;width:35%;' }= "#{t('carer_name')} :"
-            %span{ style: 'display:table-cell;width:65%;border-bottom:1px solid #000' }
+            %span{ style: 'display:table-cell;width:50%;' }= "#{t('carer_name')} :"
+            %span.text-center{ style: 'display:table-cell;width:50%;border-bottom:1px solid #000' }
               = @government_report.carer_name
         .col-xs-6
           %p{ style: 'display:table;width:100%;' }
             %span{ style: 'display:table-cell;width:50%;' }= "#{t('communication_with_client')} :"
-            %span{ style: 'display:table-cell;width:60%;border-bottom:1px solid #000;' }
+            %span.text-center{ style: 'display:table-cell;width:60%;border-bottom:1px solid #000;' }
               = @government_report.client_contact
     .col-xs-12{ style: 'padding:5px 0;' }
       %p{ style: 'display:table;width:100%;' }
-        %span{ style: 'display:table-cell;width:22%;' }= "#{t('carer_address')} :"
-        %span{ style: 'display:table-cell;width:8%;' }= "#{t('house_number')} :"
-        %span{ style: 'display:table-cell;width:8%;border-bottom:1px solid #000;' }
+        %span{ style: 'display:table-cell;width:25%;' }= "#{t('carer_address')} :"
+        %span{ style: 'display:table-cell;width:10%;' }= "#{t('house_number')} :"
+        %span.text-center{ style: 'display:table-cell;width:10%;border-bottom:1px solid #000;' }
           = @government_report.carer_house_number
-        %span{ style: 'display:table-cell;width:8%;' }= "#{t('street_number')} :"
-        %span{ style: 'display:table-cell;width:8%;border-bottom:1px solid #000;' }
+        %span{ style: 'display:table-cell;width:10%;' }= "#{t('street_number')} :"
+        %span.text-center{ style: 'display:table-cell;width:10%;border-bottom:1px solid #000;' }
           = @government_report.carer_street_number
         %span{ style: 'display:table-cell;width:5%;' }= "#{t('village')} :"
-        %span{ style: 'display:table-cell;width:8%;border-bottom:1px solid #000;' }
+        %span.text-center{ style: 'display:table-cell;width:30%;border-bottom:1px solid #000;' }
           = @government_report.carer_village
-        %span{ style: 'display:table-cell;width:10%;' }= "#{t('commune')} :"
-        %span{ style: 'display:table-cell;width:10%;border-bottom:1px solid #000;' }
-          = @government_report.carer_commune
     .col-xs-12{ style: 'padding:5px 0;' }
       .row
-        .col-xs-4
+        .col-xs-6
           %p{ style: 'display:table;width:100%;' }
-            %span{ style: 'display:table-cell;width:60%;' }= "#{t('city_district')} :"
-            %span{ style: 'display:table-cell;width:40%;border-bottom:1px solid #000;' }
+            %span{ style: 'display:table-cell;width:25%;' }= "#{t('commune')} :"
+            %span.text-center{ style: 'display:table-cell;width:75%;border-bottom:1px solid #000;' }
+              = @government_report.carer_commune
+        .col-xs-6
+          %p{ style: 'display:table;width:100%;' }
+            %span{ style: 'display:table-cell;width:35%;' }= "#{t('city_district')} :"
+            %span.text-center{ style: 'display:table-cell;width:65%;border-bottom:1px solid #000;' }
               = @government_report.carer_city
-        .col-xs-4
+    .col-xs-12{ style: 'padding:5px 0;' }
+      .row
+        .col-xs-6
           %p{ style: 'display:table;width:100%;' }
-            %span{ style: 'display:table-cell;width:50%;' }= "#{t('province_capital')} :"
-            %span{ style: 'display:table-cell;width:50%;border-bottom:1px solid #000;' }
+            %span{ style: 'display:table-cell;width:30%;' }= "#{t('province_capital')} :"
+            %span.text-center{ style: 'display:table-cell;width:70%;border-bottom:1px solid #000;' }
               = @government_report.carer_capital
-        .col-xs-4
+        .col-xs-6
           %p{ style: 'display:table;width:100%;' }
-            %span{ style: 'display:table-cell;width:50%;' }= "#{t('phone_number')} :"
-            %span{ style: 'display:table-cell;width:50%;border-bottom:1px solid #000;' }
+            %span{ style: 'display:table-cell;width:30%;' }= "#{t('phone_number')} :"
+            %span.text-center{ style: 'display:table-cell;width:70%;border-bottom:1px solid #000;' }
               = @government_report.carer_phone_number
     .col-xs-12{ style: 'padding:5px 0;' }
       %p{ style: 'display:table;width:100%;' }
         %span{ style: 'display:table-cell;width:45%;' }= "#{t('date_received_info')} :"
         %span{ style: 'display:table-cell;width:5%;' }= t('day')
-        %span{ style: 'display:table-cell;width:13%;border-bottom:1px solid #000;' }
-          = @government_report.case_information_date.strftime('%d')
+        %span.text-center{ style: 'display:table-cell;width:13%;border-bottom:1px solid #000;' }
+          = @government_report.case_information_date.strftime('%d') if @government_report.case_information_date
         %span{ style: 'display:table-cell;width:5%;' }= t('month')
-        %span{ style: 'display:table-cell;width:13%;border-bottom:1px solid #000;' }
-          = @government_report.case_information_date.strftime('%m')
+        %span.text-center{ style: 'display:table-cell;width:13%;border-bottom:1px solid #000;' }
+          = @government_report.case_information_date.strftime('%m') if @government_report.case_information_date
         %span{ style: 'display:table-cell;width:5%;' }= t('year')
-        %span{ style: 'display:table-cell;width:14%;border-bottom:1px solid #000;' }
-          = @government_report.case_information_date.strftime('%Y')
+        %span.text-center{ style: 'display:table-cell;width:14%;border-bottom:1px solid #000;' }
+          = @government_report.case_information_date.strftime('%Y') if @government_report.case_information_date
     .col-xs-12{ style: 'padding:5px 0;' }
       .row
         .col-xs-12
           %p{ style: 'display:table;width:100%;' }
             %span{ style: 'display:table-cell;width:20%;' }= "#{t('transfer_info')} :"
-            %span{ style: 'display:table-cell;width:5%;' }= "#{t('name')}"
-            %span{ style: 'display:table-cell;width:35%;border-bottom:1px solid #000;' }
+            %span{ style: 'display:table-cell;width:7%;' }= "#{t('name')}"
+            %span.text-center{ style: 'display:table-cell;width:33%;border-bottom:1px solid #000;' }
               = @government_report.referral_name
-            %span{ style: 'display:table-cell;width:5%;' }= "#{t('position')}"
-            %span{ style: 'display:table-cell;width:35%;border-bottom:1px solid #000;' }
+            %span{ style: 'display:table-cell;width:7%;' }= "#{t('position')}"
+            %span.text-center{ style: 'display:table-cell;width:33%;border-bottom:1px solid #000;' }
               = @government_report.referral_position
     .col-xs-12{ style: 'padding:5px 0;' }
       %p
@@ -187,10 +181,10 @@
             = @government_report.anonymous_description
     - else
       %footer{ style: 'page-break-after:always;'}
-        %p{style:'display:inline-block;border-bottom:1px solid #000;width:100%;padding: 5px 0;'}
-        %p{style:'display:inline-block;border-bottom:1px solid #000;width:100%;padding: 5px 0;'}
-        %p{style:'display:inline-block;border-bottom:1px solid #000;width:100%;padding: 5px 0;'}
-        %p{style:'display:inline-block;border-bottom:1px solid #000;width:100%;padding: 5px 0;'}
+        %p.text-center{style:'display:inline-block;border-bottom:1px solid #000;width:100%;padding: 5px 0;'}
+        %p.text-center{style:'display:inline-block;border-bottom:1px solid #000;width:100%;padding: 5px 0;'}
+        %p.text-center{style:'display:inline-block;border-bottom:1px solid #000;width:100%;padding: 5px 0;'}
+        %p.text-center{style:'display:inline-block;border-bottom:1px solid #000;width:100%;padding: 5px 0;'}
     .col-xs-12
       %p
         %span= "#{t('danger_situation')} : #{t('check')}"
@@ -206,7 +200,7 @@
               %span= "#{qti+=1} - #{qt.first.name}"
             - qt.last.each do |qc|
               %p
-                %input{ type: 'checkbox', checked: ('checked' if [1, 3, 5, 7, 9].include?(qc.id)) }
+                %input{ type: 'checkbox', checked: ('checked' if @government_report.quantitative_cases.ids.include?(qc.id)) }
                 %span= qc.value
 
     .col-xs-12
@@ -290,26 +284,26 @@
       %p.text-center
         %span= t('day')
         %span{ style: 'width:50px;display:inline-block;border-bottom:1px dotted #000' }
-          = @government_report.done_date.strftime('%d')
+          = @government_report.done_date.strftime('%d') if @government_report.done_date
         %span= t('month')
         %span{ style: 'width:50px;display:inline-block;border-bottom:1px dotted #000' }
-          = @government_report.done_date.strftime('%m')
+          = @government_report.done_date.strftime('%m') if @government_report.done_date
         %span= t('year')
         %span{ style: 'width:50px;display:inline-block;border-bottom:1px dotted #000' }
-          = @government_report.done_date.strftime('%Y')
+          = @government_report.done_date.strftime('%Y') if @government_report.done_date
       %p.text-center
         %span= t('shortcut')
     .col-xs-6{ style: 'margin-bottom:70px;' }
       %p.text-center
         %span= t('day')
         %span{ style: 'width:50px;display:inline-block;border-bottom:1px dotted #000' }
-          = @government_report.agreed_date.strftime('%d')
+          = @government_report.agreed_date.strftime('%d') if @government_report.agreed_date
         %span= t('month')
         %span{ style: 'width:50px;display:inline-block;border-bottom:1px dotted #000' }
-          = @government_report.agreed_date.strftime('%m')
+          = @government_report.agreed_date.strftime('%m') if @government_report.agreed_date
         %span= t('year')
         %span{ style: 'width:50px;display:inline-block;border-bottom:1px dotted #000' }
-          = @government_report.agreed_date.strftime('%Y')
+          = @government_report.agreed_date.strftime('%Y') if @government_report.agreed_date
       %p.text-center= t('seen_and_agreed')
       %p.text-center= t('signature')
   .row

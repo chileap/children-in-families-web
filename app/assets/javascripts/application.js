@@ -18,7 +18,6 @@
 //= require clients/index
 //= require clients/show
 //= require clients/form
-//= require clients/report
 //= require common
 //= require jquery.validate
 //= require jquery.validate.additional-methods
@@ -27,3 +26,4 @@
 //= require users/show
 //= require users/index
 //= require partners/index
+//= require government_reports/form
