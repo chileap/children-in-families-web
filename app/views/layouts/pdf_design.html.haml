@@ -1,9 +1,10 @@
 !!!
 %html
   %head
-    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport", charset: 'utf-8'}
+    %meta{:charset => "utf-8"}
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
     %title CIF
-    = wicked_pdf_stylesheet_link_tag 'application', media: 'all'
+    = wicked_pdf_stylesheet_link_tag 'application'
     :javascript
       function number_pages() {
         var vars={};
