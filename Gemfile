@@ -36,8 +36,7 @@ gem 'jquery-validation-rails'
 gem 'will_paginate-bootstrap'
 gem 'jquery-datatables-rails', '~> 3.4'
 gem 'friendly_id',            '~> 5.1.0'
-gem 'wicked'
-gem 'wicked_pdf'
+gem 'wicked_pdf', github: 'mileszs/wicked_pdf'
 gem 'wkhtmltopdf-binary-edge', '~> 0.12.2.1'
 
 group :development, :test do
