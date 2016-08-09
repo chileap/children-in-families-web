@@ -3,6 +3,7 @@
 //= require select2
 //= require bootstrap-sprockets
 //= require jquery.steps.min
+//= require thredded
 
 //= require bootstrap-datepicker
 
