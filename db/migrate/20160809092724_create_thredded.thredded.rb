@@ -138,7 +138,7 @@ class CreateThredded < ActiveRecord::Migration
       t.integer :posts_count, default: 0
       t.integer :topics_count, default: 0
       t.datetime :last_seen_at
-      t.integer :moderation_state, null: false, default: 0 # pending_moderation
+      t.integer :moderation_state, null: false, default: 1 # approved
       t.timestamp :moderation_state_changed_at
       t.timestamps null: false
       t.index %i(moderation_state moderation_state_changed_at),

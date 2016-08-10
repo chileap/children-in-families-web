@@ -30,9 +30,9 @@ Thredded.avatar_url = ->(user) { Gravatar.src(user.email, 128, 'mm') }
 # and admins and moderators are determined by a flag on the users table.
 
 # The name of the moderator flag column on the users table.
-Thredded.moderator_column = :admin?
+Thredded.moderator_column = :anyone?
 # The name of the admin flag column on the users table.
-Thredded.admin_column = :admin?
+Thredded.admin_column = :anyone?
 
 # Whether posts and topics pending moderation are visible to regular users.
 Thredded.content_visible_while_pending_moderation = true
@@ -42,16 +42,16 @@ Thredded.content_visible_while_pending_moderation = true
 
 # ==> Email Configuration
 # Email "From:" field will use the following
-# Thredded.email_from = 'no-reply@example.com'
+Thredded.email_from = 'cifdonotreply@gmail.com'
 
 # Incoming email will be directed to this host
-# Thredded.email_incoming_host = 'example.com'
+Thredded.email_incoming_host = 'cif-web-staging.rotati.com'
 
 # Emails going out will prefix the "Subject:" with the following string
-# Thredded.email_outgoing_prefix = '[My Forum] '
+Thredded.email_outgoing_prefix = '[CIF FAQ] '
 
 # Reply to field for email notifications
-# Thredded.email_reply_to = -> postable { "#{postable.hash_id}@#{Thredded.email_incoming_host}" }
+Thredded.email_reply_to = -> postable { "#{postable.hash_id}@#{Thredded.email_incoming_host}" }
 
 # ==> View Configuration
 # Set the layout for rendering the thredded views.

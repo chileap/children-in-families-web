@@ -36,6 +36,10 @@ class User < ActiveRecord::Base
     select(column_names - ['tokens'])
   end
 
+  def to_s
+    name
+  end
+
   def name
     "#{first_name} #{last_name}"
   end
@@ -66,6 +70,10 @@ class User < ActiveRecord::Base
 
   def any_case_manager?
     ec_manager? || fc_manager? || kc_manager?
+  end
+
+  def anyone?
+    admin? || case_worker? || able_manager? || any_case_manager?
   end
 
   def has_no_clients_cases_and_tasks?
