@@ -45,7 +45,7 @@ Thredded.content_visible_while_pending_moderation = true
 Thredded.email_from = 'cifdonotreply@gmail.com'
 
 # Incoming email will be directed to this host
-Thredded.email_incoming_host = 'cif-web-staging.rotati.com'
+Thredded.email_incoming_host = ENV['HOST_SERVER']
 
 # Emails going out will prefix the "Subject:" with the following string
 Thredded.email_outgoing_prefix = '[FAQ] '
