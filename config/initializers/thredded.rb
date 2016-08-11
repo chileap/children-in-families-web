@@ -48,7 +48,7 @@ Thredded.email_from = 'cifdonotreply@gmail.com'
 Thredded.email_incoming_host = 'cif-web-staging.rotati.com'
 
 # Emails going out will prefix the "Subject:" with the following string
-Thredded.email_outgoing_prefix = '[CIF FAQ] '
+Thredded.email_outgoing_prefix = '[FAQ] '
 
 # Reply to field for email notifications
 Thredded.email_reply_to = -> postable { "#{postable.hash_id}@#{Thredded.email_incoming_host}" }
