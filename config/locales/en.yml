@@ -1,4 +1,5 @@
 en:
+  faq: FAQ
   default_government_report_fields: &default_government_report_fields
     code: Form
     kingdom_of_cambodia: Kingdom of Cambodia
