@@ -7,8 +7,6 @@ module Thredded
       email_details        = TopicEmailView.new(@post.postable)
       headers['X-SMTPAPI'] = email_details.smtp_api_tag('post_notification')
 
-      binding.pry
-
       mail from:     email_details.no_reply,
            to:       emails,
            bcc:      emails,
