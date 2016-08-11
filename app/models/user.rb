@@ -32,6 +32,12 @@ class User < ActiveRecord::Base
 
   scope :has_clients,     ->         { joins(:clients).without_json_fields.uniq }
 
+  before_save :set_name
+
+  def set_name
+    self.name = name
+  end
+
   def self.without_json_fields
     select(column_names - ['tokens'])
   end
