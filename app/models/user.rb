@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
   before_save :set_name
 
   def set_name
-    self.name = name
+    self.name = "#{first_name} #{last_name}"
   end
 
   def self.without_json_fields
@@ -44,10 +44,6 @@ class User < ActiveRecord::Base
 
   def to_s
     name
-  end
-
-  def name
-    "#{first_name} #{last_name}"
   end
 
   def admin?
