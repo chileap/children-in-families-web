@@ -7,9 +7,9 @@
 # for your user class - change it here.
 Thredded.user_class = 'User'
 
-# User name column, used in @mention syntax and should be unique.
+# User email column, used in @mention syntax and should be unique.
 # This is the column used to search for users' names if/when someone is @ mentioned.
-Thredded.user_name_column = :name
+Thredded.user_name_column = :email
 
 # The path (or URL) you will use to link to your users' profiles.
 # When linking to a user, Thredded will use this lambda to spit out
@@ -30,9 +30,9 @@ Thredded.avatar_url = ->(user) { Gravatar.src(user.email, 128, 'mm') }
 # and admins and moderators are determined by a flag on the users table.
 
 # The name of the moderator flag column on the users table.
-Thredded.moderator_column = :anyone?
+Thredded.moderator_column = :admin
 # The name of the admin flag column on the users table.
-Thredded.admin_column = :anyone?
+Thredded.admin_column = :admin
 
 # Whether posts and topics pending moderation are visible to regular users.
 Thredded.content_visible_while_pending_moderation = true

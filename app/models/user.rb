@@ -11,7 +11,6 @@ class User < ActiveRecord::Base
   has_many :clients
 
   validates :roles, presence: true
-  validates :first_name, presence: true, uniqueness: true
 
   scope :first_name_like, -> (value) { where('LOWER(users.first_name) LIKE ?', "%#{value.downcase}%") }
 
@@ -33,10 +32,14 @@ class User < ActiveRecord::Base
 
   scope :has_clients,     ->         { joins(:clients).without_json_fields.uniq }
 
-  before_save :set_name
+  before_save :set_name, :assign_as_admin
 
   def set_name
     self.name = "#{first_name} #{last_name}"
+  end
+
+  def assign_as_admin
+    self.admin = true if admin?
   end
 
   def self.without_json_fields
