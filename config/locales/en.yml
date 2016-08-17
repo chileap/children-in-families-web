@@ -934,3 +934,12 @@ en:
     next_label: Next Page
   save: Save
   cancel: Cancel
+
+  # Thredded - FAQ
+  thredded:
+    nav:
+      home: Home
+    shared:
+      nav:
+        sign_out: Sign Out
+        sign_in: Sign In
