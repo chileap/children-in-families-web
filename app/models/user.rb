@@ -32,10 +32,10 @@ class User < ActiveRecord::Base
 
   scope :has_clients,     ->         { joins(:clients).without_json_fields.uniq }
 
-  before_save :set_name, :assign_as_admin
+  before_save :assign_as_admin
 
-  def set_name
-    self.name = "#{first_name} #{last_name}"
+  def name
+    "#{first_name} #{last_name}"
   end
 
   def assign_as_admin

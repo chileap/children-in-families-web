@@ -10,18 +10,6 @@ describe User, 'validations' do
 end
 
 describe User, 'callbacks' do
-  context 'set name' do
-    let!(:user){ create(:user, roles: 'case worker', first_name: 'Coca', last_name: 'Cola') }
-    before do
-      user.name = "#{user.first_name} #{user.last_name}"
-      user.reload
-    end
-
-    it 'should set name to user' do
-      expect(user.name).to eq('Coca Cola')
-    end
-  end
-
   context 'assign as admin' do
     let!(:user){ create(:user, roles: 'admin', first_name: 'Coca', last_name: 'Cola') }
     before do
