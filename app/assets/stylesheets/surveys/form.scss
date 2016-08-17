@@ -1,0 +1,21 @@
+body[id='surveys-new'],
+body[id='surveys-create'],
+body[id='surveys-edit'],
+body[id='surveys-update'] {
+  .panel-body {
+    padding: 30px;
+  }
+
+  .score-evaluation {
+    margin-right: 30px;
+  }
+
+  label.radio_buttons {
+    color: inherit;
+    display: block;
+  }
+  .radio.inline {
+    display: inline;
+    margin-right: 30px;
+  }
+}

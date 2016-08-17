@@ -41,6 +41,7 @@ Rails.application.routes.draw do
     scope module: 'client' do
       resources :tasks
     end
+    resources :surveys
   end
 
   

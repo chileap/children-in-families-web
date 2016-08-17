@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160817021354) do
+ActiveRecord::Schema.define(version: 20160817075800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -355,6 +355,23 @@ ActiveRecord::Schema.define(version: 20160817021354) do
     t.integer  "clients_count", default: 0
   end
 
+  create_table "surveys", force: :cascade do |t|
+    t.integer  "client_id"
+    t.integer  "user_id"
+    t.integer  "listening_score"
+    t.integer  "problem_solving_score"
+    t.integer  "getting_in_touch_score"
+    t.integer  "trust_score"
+    t.integer  "difficulty_help_score"
+    t.integer  "support_score"
+    t.integer  "family_need_score"
+    t.integer  "care_score"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "surveys", ["client_id"], name: "index_surveys_on_client_id", using: :btree
+
   create_table "tasks", force: :cascade do |t|
     t.string   "name",                      default: ""
     t.date     "completion_date"
@@ -621,6 +638,7 @@ ActiveRecord::Schema.define(version: 20160817021354) do
   add_foreign_key "case_notes", "clients"
   add_foreign_key "domains", "domain_groups"
   add_foreign_key "quarterly_reports", "cases"
+  add_foreign_key "surveys", "clients"
   add_foreign_key "tasks", "clients"
   add_foreign_key "thredded_messageboard_users", "thredded_messageboards"
   add_foreign_key "thredded_messageboard_users", "thredded_user_details"
