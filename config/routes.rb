@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :quarterly_reports
   devise_for :users, controllers: { registrations: 'registrations' }
   root 'home#index'
+  match '/search', to: 'clients#index', via: :post
 
   get '/robots.txt' => 'home#robots'
 
