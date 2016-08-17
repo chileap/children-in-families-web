@@ -420,6 +420,10 @@ km:
       view_legacy_quarterly_reports: មើល Quarterly Reports ចាស់ៗ
       take_survey: ការស្ទង់មតិ
       reject_client: មិនទទួលយកអតិថិជន
+      time_in_care: រយៈពេលមើលថែទាំ
+      time_in_care_around:
+        one: ប្រហែលមួយឆ្នាំ
+        other: "ប្រហែល%{count}ឆ្នាំ"
       <<: *default_client_fields
       placements:
         <<: *default_placement_fields

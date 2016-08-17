@@ -195,4 +195,14 @@ class Client < ActiveRecord::Base
     self.slug = "#{ENV['ORGANISATION_ABBREVIATION']}-#{id}"
     self.save
   end
+
+  def time_in_care
+    if cases.current.present?
+      total_month      = Date.today.year * 12 + Date.today.month
+      total_care_month = (cases.current.start_date.year * 12 + cases.current.start_date.month)
+      ((total_month - total_care_month).to_f / 12).round(1)
+    else
+      nil
+    end
+  end
 end

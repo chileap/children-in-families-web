@@ -67,6 +67,12 @@
                         = "#{@client.birth_province.name}" if @client.birth_province
                   %tr
                     %td.spacing-first-col
+                      = t('.time_in_care')
+                    %td
+                      %strong
+                        = t('.time_in_care_around', count: @client.time_in_care) if @client.time_in_care
+                  %tr
+                    %td.spacing-first-col
                       = t('.initial_referral_date')
                     %td
                       %strong

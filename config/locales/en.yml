@@ -416,6 +416,10 @@ en:
       note: Note
       view_legacy_quarterly_reports: Legacy Quarterly Reports
       take_survey: Take Survey
+      time_in_care: Time In Care
+      time_in_care_around:
+        one: Around 1 year
+        other: "Around %{count} years"
       <<: *default_client_fields
       placements:
         <<: *default_placement_fields
