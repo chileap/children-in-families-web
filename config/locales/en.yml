@@ -420,6 +420,7 @@ en:
       time_in_care_around:
         one: Around 1 year
         other: "Around %{count} years"
+
       <<: *default_client_fields
       placements:
         <<: *default_placement_fields
@@ -428,6 +429,8 @@ en:
     emergency_case:
       <<: *default_placement_fields
       emergency_care: Emergency Care
+      emergency_case:
+        emergency_care: Emergency Care
     exit_case_form:
       exit_ec: Exit Emergency Care
       exit_kc: Exit Kinship Care
@@ -440,9 +443,13 @@ en:
     kinship_case:
       <<: *default_placement_fields
       kinship_care: Kinship Care
+      kinship_case:
+        kinship_care: Kinship Care
     foster_case:
       <<: *default_placement_fields
       foster_care: Foster Care
+      foster_case:
+        foster_care: Foster Care
     placement:
       view_legacy_quarterly_reports: View Legacy Quarterly Reports
     state:

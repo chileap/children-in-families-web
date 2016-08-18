@@ -432,9 +432,14 @@ km:
     emergency_case:
       <<: *default_placement_fields
       emergency_care: ករណី Emergency
+      emergency_case:
+        emergency_care: ករណី Emergency
+
     kinship_case:
       <<: *default_placement_fields
       kinship_care: ករណី Kinship
+      kinship_case:
+        kinship_care: ករណី Kinship
     exit_kc_form:
       exit_ec: ចាកចេញពី EC
       exit_kc: ចាកចេញពី KC
@@ -447,6 +452,8 @@ km:
     foster_case:
       <<: *default_placement_fields
       foster_care: ករណី Foster
+      foster_case:
+        foster_care: ករណី Foster
     placement:
       view_legacy_quarterly_reports: មើល Quarterly Reports ចាស់ៗ
     state:
