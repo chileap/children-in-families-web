@@ -302,6 +302,16 @@ en:
       successfully_updated: Survey has been successfully updated.
     destroy:
       successfully_deleted: Survey has been successfully deleted.
+    index:
+      user_id: My Community Case Worker's name is
+      are_you_sure_you_want_to_delete: Are you sure you want to delete?
+      survey_title: Survey History
+      created_at: Created Date
+      action: Action
+    show:
+      back: Back
+      survey_detail: Survey Detail
+      <<: *default_survey_fields
 
   datagrid:
     no_results: No results found

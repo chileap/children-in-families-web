@@ -2,7 +2,7 @@ class SurveysController < AdminController
   load_and_authorize_resource
 
   before_action :find_client
-  before_action :find_survey, only: [:show, :edit, :update, :destroy]
+  before_action :find_survey, only: [:edit, :update, :destroy]
 
   def index
     @surveys = @client.surveys
@@ -22,6 +22,7 @@ class SurveysController < AdminController
   end
 
   def show
+    @survey = @client.surveys.find(params[:id]).decorate
   end
 
   def edit
@@ -46,7 +47,6 @@ class SurveysController < AdminController
   end
 
   def survey_params
-    # binding.pry
     params.require(:survey).permit(:listening_score, :problem_solving_score, :getting_in_touch_score, :trust_score, :difficulty_help_score, :support_score, :family_need_score, :care_score)
   end
 end

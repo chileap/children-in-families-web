@@ -5,9 +5,19 @@ body[id='surveys-update'] {
   .panel-body {
     padding: 30px;
   }
+  .form-group.radio_buttons {
+    padding: 10px;
+  }
+
+  .survey-note input {
+    margin: 0 5px 0 20px;
+  }
+  .strongly-agree {
+    margin-left: 20px;
+  }
 
   .score-evaluation {
-    margin-right: 30px;
+    margin-right: 20px;
   }
 
   label.radio_buttons {
@@ -17,5 +27,8 @@ body[id='surveys-update'] {
   .radio.inline {
     display: inline;
     margin-right: 30px;
+  }
+  .errors {
+    border: 1px solid red;
   }
 }
