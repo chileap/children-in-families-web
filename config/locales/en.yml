@@ -418,7 +418,7 @@ en:
       take_survey: Take Survey
       time_in_care: Time In Care
       time_in_care_around:
-        one: Around 1 year
+        one: "Around %{count} year"
         other: "Around %{count} years"
 
       <<: *default_client_fields

@@ -197,36 +197,28 @@ class Client < ActiveRecord::Base
   end
 
   def time_in_care
-    if cases.any? # has any case
-      if cases.active.any? # has active case
+    if cases.any?
+      if cases.active.any?
         active_cases      = cases.active.order(:created_at)
         first_active_case = active_cases.active.first
+        
+        start_date        = first_active_case.start_date.to_date
+        current_date      = Date.today.to_date
 
-        start_date        = first_active_case.start_date.year * 12 + first_active_case.start_date.month
-        today_total_month = Date.today.year * 12 + Date.today.month
+        ((current_date - start_date).to_f / 365).round(1)
 
-        ((today_total_month - start_date).to_f / 12).round(1)
-
-      else # has not active case
+      else
         inactive_cases     = cases.inactive.order(:updated_at)
         last_inactive_case = inactive_cases.last
-        end_date           = last_inactive_case.exit_date.year * 12 + last_inactive_case.exit_date.month
-        # 24212
+        end_date           = last_inactive_case.exit_date.to_date
+        
         first_case         = cases.inactive.order(:created_at).first
-        start_date         = first_case.start_date.year * 12 + first_case.start_date.month
-        # 24188
-        ((end_date - start_date).to_f / 12).round(1)
+        start_date         = first_case.start_date.to_date
+        
+        ((end_date - start_date).to_f / 365).round(1)
       end
     else
-      nil # no case, no time in care
+      nil
     end
-
-    # if cases.current.present?
-    #   total_month      = Date.today.year * 12 + Date.today.month
-    #   total_care_month = (cases.current.start_date.year * 12 + cases.current.start_date.month)
-    #   ((total_month - total_care_month).to_f / 12).round(1)
-    # else
-    #   nil
-    # end
   end
 end
