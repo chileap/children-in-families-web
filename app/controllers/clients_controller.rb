@@ -1,14 +1,14 @@
 class ClientsController < AdminController
-  load_and_authorize_resource find_by: :slug
+  load_and_authorize_resource find_by: :slug, except: :quantitative_case
 
   before_action :find_client, only: [:show, :edit, :update, :destroy]
   before_action :set_association, except: [:index, :destroy]
 
   def index
     if current_user.admin?
-      @client_grid = ClientGrid.new(params[:client_grid])
+      admin_client_grid
     elsif current_user.case_worker? || current_user.able_manager? || current_user.any_case_manager?
-      @client_grid = ClientGrid.new(params.fetch(:client_grid, {}).merge!(current_user: current_user))
+      non_admin_client_grid
     end
     columns_visibility
 
@@ -68,6 +68,14 @@ class ClientsController < AdminController
     redirect_to clients_url, notice: t('.successfully_deleted')
   end
 
+  def quantitative_case
+    if params[:id].blank?
+      render json: QuantitativeCase.all, root: :data
+    else
+      render json: QuantitativeCase.quantitative_cases_by_type(params[:id]), root: :data
+    end
+  end
+
   private
 
   def find_client
@@ -97,5 +105,23 @@ class ClientsController < AdminController
       end
       @client_grid.column_names << :assessments if @client_grid.column_names.any?
     end
+  end
+
+  def admin_client_grid
+    if params[:client_grid] && params[:client_grid][:quantitative_types]
+      qType = params[:client_grid][:quantitative_types]
+      @client_grid = ClientGrid.new(params.fetch(:client_grid, {}).merge!(qType: qType))
+    else
+      @client_grid = ClientGrid.new(params[:client_grid])
+    end 
+  end
+
+  def non_admin_client_grid
+    if params[:client_grid] && params[:client_grid][:quantitative_types]
+      qType = params[:client_grid][:quantitative_types]
+      @client_grid = ClientGrid.new(params.fetch(:client_grid, {}).merge!(current_user: current_user, qType: qType))
+    else
+      @client_grid = ClientGrid.new(params.fetch(:client_grid, {}).merge!(current_user: current_user))
+    end 
   end
 end

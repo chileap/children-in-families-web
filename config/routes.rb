@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   get '/robots.txt' => 'home#robots'
   post 'csi_statistics' => 'csi_statistics#index'
+  get '/quantitative_data' => 'clients#quantitative_case'
+  
   resources :csi_statistics, only: [:index]
   resources :agencies, except: [:show]
 

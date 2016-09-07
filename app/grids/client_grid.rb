@@ -1,7 +1,7 @@
 class ClientGrid
   include Datagrid
 
-  attr_accessor :current_user
+  attr_accessor :current_user, :qType
   scope do
     Client.includes({ cases: [:family, :partner] }, :referral_source, :user, :received_by, :followed_up_by, :province, :agencies).order('clients.status, clients.first_name')
   end
@@ -23,7 +23,11 @@ class ClientGrid
   end
 
   filter(:case_type, :enum, select: :case_types, header: -> { I18n.t('datagrid.columns.cases.case_type') }) do |name, scope|
-    scope.joins(:cases).where('LOWER(cases.case_type) = ?', name.downcase) if name.present?
+    case_ids = []
+    Case.active.where(case_type: name).each do |c|
+      case_ids << c.id if c.most_current?
+    end
+    scope.joins(:cases).where(cases: { id: case_ids })
   end
 
   def case_types
@@ -31,8 +35,29 @@ class ClientGrid
   end
   filter(:date_of_birth, :date, range: true, header: -> { I18n.t('datagrid.columns.clients.date_of_birth') })
 
-  filter(:age, :integer, range: true, header: -> { I18n.t('datagrid.columns.clients.age') }) do |value, scope|
+  # filter(:age, :dynamic, select: :filter_by_age, header: -> { I18n.t('datagrid.columns.clients.age') }) do |(age, operation, value), scope|
+  #   dob = (value.to_f * 12).to_i.months.ago
+  #   if operation == '='
+  #     scope.where.not(date_of_birth: nil).where(date_of_birth: dob)
+  #   else
+  #     scope.where.not("clients.date_of_birth = ? AND clients.date_of_birth #{operation} ?", nil, dob)
+  #   end
+  # end
+
+  # def filter_by_age
+  #   [I18n.t('datagrid.columns.clients.age')]
+  # end
+
+  filter(:age, :float, range: true, header: -> { I18n.t('datagrid.columns.clients.age') }) do |value, scope|
     scope.age_between(value[0], value[1]) if value[0].present? && value[1].present?
+  end
+
+  filter(:has_date_of_birth, :enum, select: :has_or_has_no_dob, header: -> { I18n.t('datagrid.columns.clients.has_date_of_birth') }) do |value, scope|
+    value == 'Yes' ? scope.where.not(date_of_birth: nil) : scope.where(date_of_birth: nil)
+  end
+
+  def has_or_has_no_dob
+    [[I18n.t('datagrid.columns.clients.has_dob'), 'Yes'], [I18n.t('datagrid.columns.clients.no_dob'), 'No']]
   end
 
   filter(:birth_province_id, :enum, select: :province_with_birth_place, header: -> { I18n.t('datagrid.columns.clients.birth_province') })
@@ -110,38 +135,35 @@ class ClientGrid
     object.find_by_family_id(value) if value.present?
   end
 
-  # def quantitative_cases_options
-  #   QuantitativeCase.joins(:clients).pluck(:value).uniq
-  # end
-
-  # filter(:quantitative_cases_value, :enum, multiple: true, select: :quantitative_cases_options, header: -> { I18n.t('datagrid.columns.clients.quantitative_case_values') }) do |value, scope|
-  #   if quantitative_cases ||= QuantitativeCase.value_like(value)
-  #     scope.joins(:quantitative_cases).where(quantitative_cases: { id: quantitative_cases.ids }).uniq
-  #   else
-  #     scope.joins(:quantitative_cases).where(quantitative_cases: { id: nil })
-  #   end
-  # end
-
   def quantitative_type_options
     QuantitativeType.all.map{ |t| [t.name, t.id] }
   end
 
   filter(:quantitative_types, :enum, select: :quantitative_type_options, header: -> { I18n.t('datagrid.columns.clients.quantitative_types') }) do |value, scope|
-    ids = scope.joins(:quantitative_cases).where(quantitative_cases: { quantitative_type_id: value.to_i }).pluck(:id).uniq
+    ids = Client.joins(:quantitative_cases).where(quantitative_cases: { quantitative_type_id: value.to_i }).pluck(:id).uniq
+    scope.where(id: ids)
+  end
+
+  def quantitative_cases
+    qType.present? ? QuantitativeType.find(qType.to_i).quantitative_cases.map{ |t| [t.value, t.id] } : QuantitativeCase.all.map{ |t| [t.value, t.id] }
+  end
+
+  filter(:quantitative_data, :enum, select: :quantitative_cases, header: -> { I18n.t('datagrid.columns.clients.quantitative_case_values') }) do |value, scope|
+    ids = Client.joins(:quantitative_cases).where(quantitative_cases: { id: value.to_i }).pluck(:id).uniq
     scope.where(id: ids)
   end
 
   filter(:any_assessments, :enum, select: %w(Yes No), header: -> { I18n.t('datagrid.columns.clients.any_assessments') }) do |value, scope|
     if value == 'Yes'
-      ids = scope.joins(:assessments).pluck(:id).uniq
-      scope.where(id: ids)
+      client_ids = Client.joins(:assessments).uniq.pluck(:id)
+      scope.where(id: client_ids)
     else
       scope.without_assessments
     end
   end
   
   filter(:all_domains, :dynamic, select: ['All CSI'], header: -> { I18n.t('datagrid.columns.clients.domains') }) do |(field, operation, value), scope|
-    operation_value = operation + value
+    value = value.to_i
     assessment_id = []
     AssessmentDomain.all.group_by(&:assessment_id).each do |key, ad|
       arr = []
@@ -150,7 +172,7 @@ class ClientGrid
         if operation == '='
           arr.push v.score == value.to_i ? true : false
         else
-          arr.push eval("#{v.score}#{operation_value}") ? true : false
+          arr.push eval("#{v.score}#{operation}#{value}") ? true : false
         end
         a_id.push v.assessment_id
       end
@@ -171,51 +193,63 @@ class ClientGrid
     domain.present?  ? Array.new([[domain.name, domain.id]]) : []
   end
 
-  filter(:domain_1a, :dynamic, select: get_domain('1A'), header: -> { "#{I18n.t('datagrid.columns.clients.domain')} 1A" }) do |(domain_id, operation, value), scope|
+  filter(:domain_1a, :dynamic, select: get_domain('1A'), header: -> { "#{I18n.t('datagrid.columns.clients.domain')} 1A (Food Security)" }) do |(domain_id, operation, value), scope|
+    value = value.to_i
     client_by_domain(operation, value, domain_id, scope)
   end
 
-  filter(:domain_1b, :dynamic, select: get_domain('1B'), header: -> { "#{I18n.t('datagrid.columns.clients.domain')} 1B" }) do |(domain_id, operation, value), scope|
+  filter(:domain_1b, :dynamic, select: get_domain('1B'), header: -> { "#{I18n.t('datagrid.columns.clients.domain')} 1B (Nutrition and Growth)" }) do |(domain_id, operation, value), scope|
+    value = value.to_i
     client_by_domain(operation, value, domain_id, scope)
   end
 
-  filter(:domain_2a, :dynamic, select: get_domain('2A'), header: -> { "#{I18n.t('datagrid.columns.clients.domain')} 2A" }) do |(domain_id, operation, value), scope|
+  filter(:domain_2a, :dynamic, select: get_domain('2A'), header: -> { "#{I18n.t('datagrid.columns.clients.domain')} 2A (Shelter)" }) do |(domain_id, operation, value), scope|
+    value = value.to_i
     client_by_domain(operation, value, domain_id, scope)
   end
 
-  filter(:domain_2b, :dynamic, select: get_domain('2B'), header: -> { "#{I18n.t('datagrid.columns.clients.domain')} 2B" }) do |(domain_id, operation, value), scope|
+  filter(:domain_2b, :dynamic, select: get_domain('2B'), header: -> { "#{I18n.t('datagrid.columns.clients.domain')} 2B (Care)" }) do |(domain_id, operation, value), scope|
+    value = value.to_i
     client_by_domain(operation, value, domain_id, scope)
   end
 
-  filter(:domain_3a, :dynamic, select: get_domain('3A'), header: -> { "#{I18n.t('datagrid.columns.clients.domain')} 3A" }) do |(domain_id, operation, value), scope|
+  filter(:domain_3a, :dynamic, select: get_domain('3A'), header: -> { "#{I18n.t('datagrid.columns.clients.domain')} 3A (Protection from Abuse and Exploitation)" }) do |(domain_id, operation, value), scope|
+    value = value.to_i
     client_by_domain(operation, value, domain_id, scope)
   end
 
-  filter(:domain_3b, :dynamic, select: get_domain('3B'), header: -> { "#{I18n.t('datagrid.columns.clients.domain')} 3B" }) do |(domain_id, operation, value), scope|
+  filter(:domain_3b, :dynamic, select: get_domain('3B'), header: -> { "#{I18n.t('datagrid.columns.clients.domain')} 3B (Legal Protection)" }) do |(domain_id, operation, value), scope|
+    value = value.to_i
     client_by_domain(operation, value, domain_id, scope)
   end
 
-  filter(:domain_4a, :dynamic, select: get_domain('4A'), header: -> { "#{I18n.t('datagrid.columns.clients.domain')} 4A" }) do |(domain_id, operation, value), scope|
+  filter(:domain_4a, :dynamic, select: get_domain('4A'), header: -> { "#{I18n.t('datagrid.columns.clients.domain')} 4A (Wellness)" }) do |(domain_id, operation, value), scope|
+    value = value.to_i
     client_by_domain(operation, value, domain_id, scope)
   end
 
-  filter(:domain_4b, :dynamic, select: get_domain('4B'), header: -> { "#{I18n.t('datagrid.columns.clients.domain')} 4B" }) do |(domain_id, operation, value), scope|
+  filter(:domain_4b, :dynamic, select: get_domain('4B'), header: -> { "#{I18n.t('datagrid.columns.clients.domain')} 4B (Health Care Services)" }) do |(domain_id, operation, value), scope|
+    value = value.to_i
     client_by_domain(operation, value, domain_id, scope)
   end
 
-  filter(:domain_5a, :dynamic, select: get_domain('5A'), header: -> { "#{I18n.t('datagrid.columns.clients.domain')} 5A" }) do |(domain_id, operation, value), scope|
+  filter(:domain_5a, :dynamic, select: get_domain('5A'), header: -> { "#{I18n.t('datagrid.columns.clients.domain')} 5A (Emotional Health)" }) do |(domain_id, operation, value), scope|
+    value = value.to_i
     client_by_domain(operation, value, domain_id, scope)
   end
 
-  filter(:domain_5b, :dynamic, select: get_domain('5B'), header: -> { "#{I18n.t('datagrid.columns.clients.domain')} 5B" }) do |(domain_id, operation, value), scope|
+  filter(:domain_5b, :dynamic, select: get_domain('5B'), header: -> { "#{I18n.t('datagrid.columns.clients.domain')} 5B (Social Behaviour)" }) do |(domain_id, operation, value), scope|
+    value = value.to_i
     client_by_domain(operation, value, domain_id, scope)
   end
 
-  filter(:domain_6a, :dynamic, select: get_domain('6A'), header: -> { "#{I18n.t('datagrid.columns.clients.domain')} 6A" }) do |(domain_id, operation, value), scope|
+  filter(:domain_6a, :dynamic, select: get_domain('6A'), header: -> { "#{I18n.t('datagrid.columns.clients.domain')} 6A (Performance)" }) do |(domain_id, operation, value), scope|
+    value = value.to_i
     client_by_domain(operation, value, domain_id, scope)
   end
   
-  filter(:domain_6b, :dynamic, select: get_domain('6B'), header: -> { "#{I18n.t('datagrid.columns.clients.domain')} 6B" }) do |(domain_id, operation, value), scope|
+  filter(:domain_6b, :dynamic, select: get_domain('6B'), header: -> { "#{I18n.t('datagrid.columns.clients.domain')} 6B (Work and Education)" }) do |(domain_id, operation, value), scope|
+    value = value.to_i
     client_by_domain(operation, value, domain_id, scope)
   end
 
@@ -245,7 +279,7 @@ class ClientGrid
   end
 
   column(:cases, header: -> { I18n.t('datagrid.columns.cases.case_type') }, order: proc { |scope| scope.includes(:cases).order('cases.case_type') } ) do |object|
-    object.cases.most_recents.first.case_type if object.cases.any?
+    object.cases.current.case_type if object.cases.current.present?
   end
 
   column(:history_of_disability_and_or_illness, header: -> { I18n.t('datagrid.columns.clients.history_of_disability_and_or_illness') }) do |object|
