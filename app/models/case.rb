@@ -60,6 +60,15 @@ class Case < ActiveRecord::Base
     case_type != 'EC'
   end
 
+  def self.order_case_type
+    ids = []
+    active.reorder(:case_type).group_by(&:client_id).each do |a|
+      ids << a.last.last.id
+    end
+    ids
+    # Case.where(id: ids).order(:case_type).pluck(:case_type)
+  end
+
   private
 
   def update_client_status

@@ -278,7 +278,48 @@ class ClientGrid
     end
   end
 
-  column(:cases, header: -> { I18n.t('datagrid.columns.cases.case_type') }, order: false ) do |object|
+  def self.case_type_order(scope)
+    case_ids = []
+    client_ids = []
+    Client.all.each do |c|
+      # case_ids << c.cases.current.id if c.cases.current
+      if c.cases.current
+        case_ids << c.cases.current.id
+      else
+        client_ids << c.id
+      end
+    end
+    # scope.merge(Client.where(id: client_ids))
+    # scope.includes(:cases).where(cases: { id: case_ids })
+    a = Client.where(id: client_ids) | Client.includes(:cases).where(cases: { id: Case.order_case_type })
+    new_ids = []
+    a.each do |c|
+      new_ids << c.id
+    end
+    # scope.includes(:cases).where(cases: { id: Case.order_case_type }).reorder('cases.case_type')
+    # scope.where(id: new_ids)
+    ids = []
+    Client.includes(:cases).where(cases: { id: Case.order_case_type }).each do |c|
+      ids << c.id
+    end
+    Client.where(id: client_ids).each do |c|
+      ids << c.id
+    end
+
+    clients = []
+    Client.where(id: ids).sort_by do |a|
+      if a.cases.current.present?
+        a.cases.current.case_type
+      else
+        ''
+      end
+    end.each do |b|
+      clients << b.id
+    end
+    scope.where(id: clients)
+  end
+
+  column(:cases, header: -> { I18n.t('datagrid.columns.cases.case_type') }, order: proc { |scope| case_type_order(scope) } ) do |object|
     object.cases.current.case_type if object.cases.current.present?
   end
 
@@ -410,7 +451,10 @@ class ClientGrid
     object.cases.current.family_preservation ? 'Yes' : 'No' if object.cases.current
   end
 
-  column(:family_id, order: 'families.id', header: -> { I18n.t('datagrid.columns.families.family_id') }) do |object|
+  def self.family_order(scope)
+  end
+
+  column(:family_id, order: proc { |scope| family_order(scope) }, header: -> { I18n.t('datagrid.columns.families.family_id') }) do |object|
     if object.cases.current && object.cases.current.family
       object.cases.current.family.id
     end
