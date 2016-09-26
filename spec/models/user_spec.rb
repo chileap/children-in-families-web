@@ -4,6 +4,7 @@ describe User, 'associations' do
   it { is_expected.to have_many(:cases)}
   it { is_expected.to have_many(:clients)}
   it { is_expected.to have_many(:changelogs)}
+  it { is_expected.to have_many(:progress_notes).dependent(:restrict_with_error)}
 end
 
 describe User, 'validations' do
@@ -153,6 +154,19 @@ describe User, 'methods' do
   let!(:fifth_case_worker){ create(:user, roles: 'case worker', first_name: FFaker::Name.name, last_name: FFaker::Name.name) }
   let!(:fifth_client) { create(:client, user: fifth_case_worker, status: 'Referred') }
   let!(:fifth_assessment) { create(:assessment, client: fifth_client, created_at: Date.today << 6) }
+
+  let!(:used_user) { create(:user) }
+  let!(:other_clent) { create(:client, user: used_user) }
+  let!(:case) { create(:case, user: used_user) }
+  let!(:task) { create(:task, user: used_user) }
+  let!(:changelog) { create(:changelog, user: used_user) }
+  let!(:location){ create(:location, name: 'ផ្សេងៗ Other') }
+  let!(:progress_note) { create(:progress_note, user: used_user, location: location) }
+
+  context 'has_no_any_associated_objects?' do
+    it { expect(admin.has_no_any_associated_objects?).to be_truthy }
+    it { expect(used_user.has_no_any_associated_objects?).to be_falsey }
+  end
 
   context 'name' do
     it{ expect(case_worker.name).to eq('First Name Last Name') }

@@ -30,6 +30,10 @@ Rails.application.routes.draw do
   resources :departments, except: [:show]
   resources :quarterly_reports, only: [:index]
   resources :changelogs
+  resources :materials, except: [:show]
+  resources :locations, except: [:show]
+  resources :progress_note_types, except: [:show]
+  resources :interventions, except: [:show]
 
   resources :tasks do
     collection do
@@ -50,6 +54,7 @@ Rails.application.routes.draw do
       resources :tasks
     end
     resources :surveys
+    resources :progress_notes
   end
 
   

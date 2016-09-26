@@ -31,3 +31,5 @@
 //= require users/index
 //= require partners/index
 //= require government_reports/form
+//= require progress_notes/form
+//= require progress_notes/index
