@@ -2,7 +2,26 @@
   .col-xs-12
     .panel.panel-default
       .panel-body
-        / - binding.pry
+        - if @versions.last.previous.present? && @versions.last.previous.reify(has_many: true, belongs_to: true).present?
+          - if @versions.last.changeset.length == 1 && @versions.last.changeset[:updated_at] && (@versions.last.item.agencies.pluck(:name) - @versions.last.previous_agencies).any?
+            .panel.panel-info
+              .panel-heading
+                %h5
+                  %span= "#{@versions.last.whodunnit} did the following change."
+                  %span{ class: "pull-right label label-#{version_color(@versions.last.event)}" }
+                    = @versions.last.event.titleize
+              .panel-body
+                %table.table.table-hover
+                  %thead
+                    %tr
+                      %th Attribute
+                      %th Before
+                      %th After
+                  %tbody
+                    %tr
+                      %td Agencies
+                      %td= @versions.last.previous_agencies.join(', ')
+                      %td= @versions.last.item.agencies.pluck(:name).join(', ')
         - @versions.each do |version|
           .panel.panel-info
             .panel-heading
@@ -22,6 +41,11 @@
                       %th Before
                       %th After
                   %tbody
+                    - if version.previous.present? && version.previous.reify(has_many: true, belongs_to: true).present?
+                      %tr
+                        %td Agencies
+                        %td= version.previous_before_agencies.join(', ')
+                        %td= version.previous_agencies.join(', ')
                     - version.changeset.each do |k, v|
                       %tr
                         %td= k.titleize

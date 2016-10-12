@@ -25,6 +25,24 @@
     object.event == 'destroy' ? 'delete' : object.event
   end
 
+  def previous_before_agencies
+    before_previous_agencies = previous.reify(has_many: true, belongs_to: true).agencies
+    agency_names = []
+    before_previous_agencies.each do |a|
+      agency_names << a.name
+    end
+    agency_names
+  end
+
+  def previous_agencies
+    before_previous_agencies = reify(has_many: true, belongs_to: true).agencies
+    agency_names = []
+    before_previous_agencies.each do |a|
+      agency_names << a.name
+    end
+    agency_names
+  end
+
   private
 
   def track_associations
