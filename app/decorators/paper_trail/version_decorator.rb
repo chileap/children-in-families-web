@@ -43,6 +43,14 @@
     agency_names
   end
 
+  def agencies_names
+    agency_names = []
+    item.agencies.each do |a|
+      agency_names << a.name
+    end
+    agency_names
+  end
+
   private
 
   def track_associations

@@ -2,14 +2,154 @@
   .col-xs-12
     .panel.panel-default
       .panel-body
-        - if @versions.last.previous.present? && @versions.last.previous.reify(has_many: true, belongs_to: true).present?
-          - if @versions.last.changeset.length == 1 && @versions.last.changeset[:updated_at] && (@versions.last.item.agencies.pluck(:name) - @versions.last.previous_agencies).any?
+        - version = @versions.first
+        - if version.present?
+          - if version.previous.present?
+            - if version.previous.reify(has_many: true, belongs_to: true).present?
+              - if version.changeset.length == 1 && version.changeset[:updated_at] && (version.agencies_names - version.previous_agencies).any?
+                .panel.panel-info
+                  .panel-heading
+                    %h5
+                      %span= "#{version.whodunnit} did the following change."
+                      %span{ class: "pull-right label label-#{version_color(version.event)}" }
+                        = version.event.titleize
+                  .panel-body
+                    %table.table.table-hover
+                      %thead
+                        %tr
+                          %th Attribute
+                          %th Previous
+                          %th Current
+                      %tbody
+                        %tr
+                          %td Agencies
+                          %td
+                            = version.previous_agencies.join(', ')
+                          %td= version.item.agencies.pluck(:name).join(', ')
+                        - version.changeset.each do |k, v|
+                          %tr
+                            %td= k.titleize
+                            - if v[0].class == ActiveSupport::TimeWithZone
+                              %td= v[0].in_time_zone.strftime('%d %B, %Y %H:%M:%S')
+                            - else
+                              %td= v[0]
+                            - if v[1].class == ActiveSupport::TimeWithZone
+                              %td= v[1].in_time_zone.strftime('%d %B, %Y %H:%M:%S')
+                            - else
+                              %td= v[1]
+              - elsif version.changeset.length > 1 && (version.agencies_names - version.previous_agencies).any?
+                .panel.panel-info
+                  .panel-heading
+                    %h5
+                      %span= "#{version.whodunnit} did the following change."
+                      %span{ class: "pull-right label label-#{version_color(version.event)}" }
+                        = version.event.titleize
+                  .panel-body
+                    %table.table.table-hover
+                      %thead
+                        %tr
+                          %th Attribute
+                          %th Previous
+                          %th Current
+                      %tbody
+                        %tr
+                          %td Agencies
+                          %td
+                            = version.previous_agencies.join(', ')
+                          %td= version.item.agencies.pluck(:name).join(', ')
+                        - version.changeset.each do |k, v|
+                          %tr
+                            %td= k.titleize
+                            - if v[0].class == ActiveSupport::TimeWithZone
+                              %td= v[0].in_time_zone.strftime('%d %B, %Y %H:%M:%S')
+                            - else
+                              %td= v[0]
+                            - if v[1].class == ActiveSupport::TimeWithZone
+                              %td= v[1].in_time_zone.strftime('%d %B, %Y %H:%M:%S')
+                            - else
+                              %td= v[1]
+        - @versions.each do |version|
+
+          / previous version exists
+
+          - if version.changeset.length > 1
+  
+            - unless (version.agencies_names - version.previous_agencies).any?
+    
+              - if version.previous
+                .panel.panel-info
+                  .panel-heading
+                    %h5
+                      %span= "#{version.whodunnit} did the following change."
+                      %span{ class: "pull-right label label-#{version_color(version.event)}" }
+                        = version.event.titleize
+                  .panel-body
+                    %table.table.table-hover
+                      %thead
+                        %tr
+                          %th Attribute
+                          %th Before
+                          %th After
+                      %tbody
+                        / -  if (version.previous_agencies - version.previous_before_agencies).any?
+                        /   %tr
+                        /     %td Agencies
+                        /     %td
+                        /       = version.previous_before_agencies.join(', ') if version.previous
+                        /     %td= version.previous_agencies.join(', ')
+                        - version.changeset.each do |k, v|
+                          %tr
+                            %td= k.titleize
+                            - if v[0].class == ActiveSupport::TimeWithZone
+                              %td= v[0].in_time_zone.strftime('%d %B, %Y %H:%M:%S')
+                            - else
+                              %td= v[0]
+                            - if v[1].class == ActiveSupport::TimeWithZone
+                              %td= v[1].in_time_zone.strftime('%d %B, %Y %H:%M:%S')
+                            - else
+                              %td= v[1]
+            - else
+    
+              .panel.panel-info
+                .panel-heading
+                  %h5
+                    %span= "#{version.whodunnit} did the following change."
+                    %span{ class: "pull-right label label-#{version_color(version.event)}" }
+                      = version.event.titleize
+                .panel-body
+                  %table.table.table-hover
+                    %thead
+                      %tr
+                        %th Attribute
+                        %th Before
+                        %th After
+                    %tbody
+            
+                      - if version.previous.present? && (version.previous_agencies - version.previous_before_agencies).any?
+                        %tr
+                          %td Agencies
+                          %td
+                            = version.previous_before_agencies.join(', ')
+                          %td= version.previous_agencies.join(', ')
+                      - version.changeset.each do |k, v|
+                        %tr
+                          %td= k.titleize
+                          - if v[0].class == ActiveSupport::TimeWithZone
+                            %td= v[0].in_time_zone.strftime('%d %B, %Y %H:%M:%S')
+                          - else
+                            %td= v[0]
+                          - if v[1].class == ActiveSupport::TimeWithZone
+                            %td= v[1].in_time_zone.strftime('%d %B, %Y %H:%M:%S')
+                          - else
+                            %td= v[1]
+          - else
+  
             .panel.panel-info
               .panel-heading
                 %h5
-                  %span= "#{@versions.last.whodunnit} did the following change."
-                  %span{ class: "pull-right label label-#{version_color(@versions.last.event)}" }
-                    = @versions.last.event.titleize
+                  %span= "#{version.whodunnit} did the following change."
+                  %span{ class: "pull-right label label-#{version_color(version.event)}" }
+                    = version.event.titleize
               .panel-body
                 %table.table.table-hover
                   %thead
@@ -18,34 +158,14 @@
                       %th Before
                       %th After
                   %tbody
-                    %tr
-                      %td Agencies
-                      %td= @versions.last.previous_agencies.join(', ')
-                      %td= @versions.last.item.agencies.pluck(:name).join(', ')
-        - @versions.each do |version|
-          .panel.panel-info
-            .panel-heading
-              %h5
-                %span= "#{version.whodunnit} did the following change."
-                %span{ class: "pull-right label label-#{version_color(version.event)}" }
-                  = version.event.titleize
-
-            .panel-body
-              - if version.event == 'delete'
-                = "Deleted #{version.item_type} ID #{version.reify.slug}, name #{version.reify.name}."
-              - else
-                %table.table.table-hover
-                  %thead
-                    %tr
-                      %th Attribute
-                      %th Before
-                      %th After
-                  %tbody
-                    - if version.previous.present? && version.previous.reify(has_many: true, belongs_to: true).present?
+        
+                    -  if version.previous.present?
                       %tr
                         %td Agencies
-                        %td= version.previous_before_agencies.join(', ')
-                        %td= version.previous_agencies.join(', ')
+                        %td
+                          = version.previous_before_agencies.join(', ')
+            
+                        %td= version.agencies_names.join(', ')
                     - version.changeset.each do |k, v|
                       %tr
                         %td= k.titleize
@@ -57,3 +177,69 @@
                           %td= v[1].in_time_zone.strftime('%d %B, %Y %H:%M:%S')
                         - else
                           %td= v[1]
+            / - else
+            /   .panel.panel-info
+            /     .panel-heading
+            /       %h5
+            /         %span= "#{version.whodunnit} did the following change."
+            /         %span{ class: "pull-right label label-#{version_color(version.event)}" }
+            /           = version.event.titleize
+            /     .panel-body
+            /       %table.table.table-hover
+            /         %thead
+            /           %tr
+            /             %th Attribute
+            /             %th Before
+            /             %th After
+            /         %tbody
+            /           - if version.previous && (version.previous_agencies - version.previous_before_agencies).any?
+            /             %tr
+            /               %td Agencies
+            /               %td
+            /                 = version.previous_before_agencies.join(', ') if version.previous
+            /               %td= version.previous_agencies.join(', ')
+            /           - version.changeset.each do |k, v|
+            /             %tr
+            /               %td= k.titleize
+            /               - if v[0].class == ActiveSupport::TimeWithZone
+            /                 %td= v[0].in_time_zone.strftime('%d %B, %Y %H:%M:%S')
+            /               - else
+            /                 %td= v[0]
+            /               - if v[1].class == ActiveSupport::TimeWithZone
+            /                 %td= v[1].in_time_zone.strftime('%d %B, %Y %H:%M:%S')
+            /               - else
+            /                 %td= v[1]
+
+        /       - if version.event == 'delete'
+        /         = "Deleted #{version.item_type} ID #{version.reify.slug}, name #{version.reify.name}."
+        /       - else
+        /         %table.table.table-hover
+        /           %thead
+        /             %tr
+        /               %th Attribute
+        /               %th Before
+        /               %th After
+        /           %tbody
+        /             - if version.previous.present?
+        /               - if version.previous.reify(has_many: true, belongs_to: true).present?
+        /                 %tr
+        /                   %td Agencies
+        /                   %td= version.previous_before_agencies.join(', ')
+        /                   %td= version.previous_agencies.join(', ')
+        /             - else
+        /               %tr
+        /                 %td Agencies
+        /                 %td= @versions.last.previous_agencies.join(', ')
+        /                 %td= @versions.last.item.agencies.pluck(:name).join(', ')
+
+        /             - version.changeset.each do |k, v|
+        /               %tr
+        /                 %td= k.titleize
+        /                 - if v[0].class == ActiveSupport::TimeWithZone
+        /                   %td= v[0].in_time_zone.strftime('%d %B, %Y %H:%M:%S')
+        /                 - else
+        /                   %td= v[0]
+        /                 - if v[1].class == ActiveSupport::TimeWithZone
+        /                   %td= v[1].in_time_zone.strftime('%d %B, %Y %H:%M:%S')
+        /                 - else
+        /                   %td= v[1]
